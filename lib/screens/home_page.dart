@@ -1,7 +1,15 @@
+import 'package:event_app/models/event.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../widget/event_card.dart';
 
 class HomePage extends StatelessWidget {
+  final EventModel event = EventModel(
+      eventDate: DateTime(2021, 10, 12),
+      currentDate: DateTime.now(),
+      imagePath: 'https://picsum.photos/200/300',
+      name: 'Mock Event');
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -29,6 +37,10 @@ class HomePage extends StatelessWidget {
             ],
           ),
         ),
+        Padding(
+          padding: EdgeInsets.fromLTRB(10, 0, 10, 30),
+          child: EventCard(eventModel: event),
+        )
       ],
     );
   }
