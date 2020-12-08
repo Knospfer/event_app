@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class RootPage extends StatefulWidget {
@@ -7,40 +6,41 @@ class RootPage extends StatefulWidget {
 }
 
 class RootState extends State<RootPage> {
+  int _selectedIndex = 0;
+  final pages = [
+    Center(
+      child: Text('Home Page!'),
+    ),
+    Center(
+      child: Text('Settings Page!'),
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return CupertinoTabScaffold(
-      tabBar: CupertinoTabBar(
+    return Scaffold(
+      body: pages.elementAt(_selectedIndex),
+      bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.settings_applications_outlined),
-              label: 'Settings')
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          )
         ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.red,
+        onTap: _onItemTapped,
       ),
-      tabBuilder: (context, index) {
-        if (index == 0) {
-          return CupertinoTabView(
-            builder: (context) {
-              return CupertinoPageScaffold(
-                  child: Center(
-                child: Text('Home page!'),
-              ));
-            },
-          );
-        }
-        if (index == 1) {
-          return CupertinoTabView(
-            builder: (context) {
-              return CupertinoPageScaffold(
-                  child: Center(
-                child: Text('Settings page!'),
-              ));
-            },
-          );
-        }
-        return null;
-      },
     );
+  }
+
+  _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 }
