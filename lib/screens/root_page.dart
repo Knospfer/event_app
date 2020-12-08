@@ -1,3 +1,4 @@
+import 'package:event_app/screens/home_page.dart';
 import 'package:flutter/material.dart';
 
 class RootPage extends StatefulWidget {
@@ -8,9 +9,7 @@ class RootPage extends StatefulWidget {
 class RootState extends State<RootPage> {
   int _selectedIndex = 0;
   final pages = [
-    Center(
-      child: Text('Home Page!'),
-    ),
+    HomePage(),
     //workaroung for spacing real tab buttons
     Center(
       child: Text('mock Page!'),
