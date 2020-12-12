@@ -1,5 +1,6 @@
 import 'package:event_app/models/event.dart';
 import 'package:event_app/widget/event_card.dart';
+import 'package:event_app/widget/image_picker_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -108,9 +109,7 @@ class AddState extends State<AddPage> {
           style: _titleStyle(),
         ),
         _padding(),
-        Text(
-          'Image pickers',
-        ),
+        _buildPickerRow(),
         _padding(bottom: 30),
         Align(
             alignment: Alignment.topCenter,
@@ -125,6 +124,24 @@ class AddState extends State<AddPage> {
                 ),
               ),
             ))
+      ],
+    );
+  }
+
+  _buildPickerRow() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        ImagePickerCard(
+            cardTitle: ImagePickerTitle.unsplash,
+            imagePath: ImagePickerPath.unsplash),
+        Text(
+          'OR',
+          textAlign: TextAlign.center,
+        ),
+        ImagePickerCard(
+            cardTitle: ImagePickerTitle.gallery,
+            imagePath: ImagePickerPath.gallery),
       ],
     );
   }
