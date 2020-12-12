@@ -83,7 +83,7 @@ class AddState extends State<AddPage> {
     return TextStyle(fontSize: 24, fontWeight: FontWeight.bold);
   }
 
-  _padding({double bottom = 10}) {
+  _padding({double bottom = 12}) {
     return Padding(padding: EdgeInsets.only(bottom: bottom));
   }
 
@@ -124,7 +124,8 @@ class AddState extends State<AddPage> {
                   style: TextStyle(color: Colors.white),
                 ),
               ),
-            ))
+            )),
+        _padding(bottom: 30),
       ],
     );
   }
