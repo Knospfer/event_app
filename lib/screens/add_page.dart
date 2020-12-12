@@ -1,7 +1,7 @@
 import 'package:event_app/models/event.dart';
 import 'package:event_app/widget/event_card.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 //todo card updated real time
 
@@ -45,30 +45,13 @@ class AddState extends State<AddPage> {
           Expanded(
               flex: 1,
               child: Container(
-                padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-                width: double.infinity,
-                decoration: _containerDecoration(),
-                child: Column(
-                  children: [
-                    Text('Title'),
-                    Text('Road trip...'),
-                    Text('Date & Time'),
-                    Text('Date picker'),
-                    Text('Background'),
-                    Text('Image pickers'),
-                    ElevatedButton(
-                      style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.black)),
-                      onPressed: null,
-                      child: Text(
-                        'Save',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    )
-                  ],
-                ),
-              ))
+                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 0),
+                  width: double.infinity,
+                  decoration: _containerDecoration(),
+                  child: ListView(
+                    physics: BouncingScrollPhysics(),
+                    children: [_buildForm()],
+                  )))
         ],
       ),
     );
@@ -92,5 +75,57 @@ class AddState extends State<AddPage> {
         color: Colors.white,
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(40.0), topRight: Radius.circular(40.0)));
+  }
+
+  _titleStyle() {
+    return TextStyle(fontSize: 24, fontWeight: FontWeight.bold);
+  }
+
+  _padding({double bottom = 10}) {
+    return Padding(padding: EdgeInsets.only(bottom: bottom));
+  }
+
+  _buildForm() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Title',
+          style: _titleStyle(),
+        ),
+        _padding(),
+        Text('Road trip...'),
+        _padding(bottom: 30),
+        Text(
+          'Date & Time',
+          style: _titleStyle(),
+        ),
+        _padding(),
+        Text('Date picker'),
+        _padding(bottom: 30),
+        Text(
+          'Background',
+          style: _titleStyle(),
+        ),
+        _padding(),
+        Text(
+          'Image pickers',
+        ),
+        _padding(bottom: 30),
+        Align(
+            alignment: Alignment.topCenter,
+            child: Container(
+              width: double.infinity,
+              child: CupertinoButton(
+                color: CupertinoColors.black,
+                onPressed: () {},
+                child: Text(
+                  'Done',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ))
+      ],
+    );
   }
 }
