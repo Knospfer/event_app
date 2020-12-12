@@ -26,7 +26,7 @@ class RootState extends State<RootPage> {
         body: pages.elementAt(_selectedIndex),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.orange[300],
+          backgroundColor: Colors.black,
           onPressed: () {
             Navigator.pushNamed(context, RoutesName.addPage);
           },
@@ -38,7 +38,7 @@ class RootState extends State<RootPage> {
           clipBehavior: Clip.antiAlias,
           notchMargin: 10.0,
           child: BottomNavigationBar(
-            backgroundColor: Colors.blue,
+            backgroundColor: Colors.grey,
             items: [
               BottomNavigationBarItem(
                 icon: Icon(Icons.home),
