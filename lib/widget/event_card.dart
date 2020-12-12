@@ -1,4 +1,5 @@
 import 'package:event_app/models/event.dart';
+import 'package:event_app/routes.dart';
 import 'package:flutter/material.dart';
 
 class EventCard extends StatelessWidget {
@@ -16,19 +17,25 @@ class EventCard extends StatelessWidget {
           ),
         ),
         child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: NetworkImage(eventModel.imagePath),
-                  fit: BoxFit.cover,
-                  alignment: Alignment.topCenter),
-            ),
-            child: Stack(
-              children: [
-                Positioned.fill(
-                    child: Container(color: Color.fromRGBO(0, 0, 0, 0.3))),
-                Padding(padding: EdgeInsets.all(20.0), child: _buildCardBody()),
-              ],
-            )));
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: NetworkImage(eventModel.imagePath),
+                fit: BoxFit.cover,
+                alignment: Alignment.topCenter),
+          ),
+          child: GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, RoutesName.detailPage);
+              },
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                      child: Container(color: Color.fromRGBO(0, 0, 0, 0.3))),
+                  Padding(
+                      padding: EdgeInsets.all(20.0), child: _buildCardBody()),
+                ],
+              )),
+        ));
   }
 
   _buildCardBody() {

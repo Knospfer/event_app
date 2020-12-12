@@ -37,7 +37,12 @@ class AddState extends State<AddPage> {
                         style: TextStyle(
                             fontSize: 26.0, fontWeight: FontWeight.bold),
                       ),
-                      Icon(Icons.close_outlined)
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Icon(Icons.close_outlined),
+                      )
                     ],
                   ),
                   _buildPaddedCard(),

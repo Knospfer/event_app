@@ -20,7 +20,14 @@ class DetailPage extends StatelessWidget {
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children: [Icon(Icons.close_outlined, color: Colors.white)],
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Icon(Icons.close_outlined, color: Colors.white),
+                      )
+                    ],
                   ),
                   Expanded(
                     flex: 1,

@@ -1,3 +1,4 @@
+import 'package:event_app/routes.dart';
 import 'package:event_app/screens/home_page.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +27,9 @@ class RootState extends State<RootPage> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.orange[300],
-          onPressed: null,
+          onPressed: () {
+            Navigator.pushNamed(context, RoutesName.addPage);
+          },
           elevation: 2.0,
           child: Icon(Icons.add),
         ),
