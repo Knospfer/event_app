@@ -46,6 +46,7 @@ class AddState extends State<AddPage> {
           Expanded(
               flex: 1,
               child: Container(
+                  clipBehavior: Clip.hardEdge,
                   padding: EdgeInsets.symmetric(horizontal: 24, vertical: 0),
                   width: double.infinity,
                   decoration: _containerDecoration(),
