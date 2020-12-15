@@ -1,4 +1,5 @@
 import 'package:event_app/models/event.dart';
+import 'package:event_app/routes.dart';
 import 'package:event_app/widget/event_card.dart';
 import 'package:event_app/widget/image_picker_card.dart';
 import 'package:flutter/cupertino.dart';
@@ -140,8 +141,12 @@ class AddState extends State<AddPage> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         ImagePickerCard(
-            cardTitle: ImagePickerTitle.unsplash,
-            imagePath: ImagePickerPath.unsplash),
+          cardTitle: ImagePickerTitle.unsplash,
+          imagePath: ImagePickerPath.unsplash,
+          onTap: () {
+            Navigator.pushNamed(context, RoutesName.unsplashPage);
+          },
+        ),
         Text(
           'OR',
           textAlign: TextAlign.center,

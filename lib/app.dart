@@ -2,6 +2,7 @@ import 'package:event_app/routes.dart';
 import 'package:event_app/screens/add_page.dart';
 import 'package:event_app/screens/detail_page.dart';
 import 'package:event_app/screens/root_page.dart';
+import 'package:event_app/screens/unsplash_page.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
@@ -21,5 +22,7 @@ Route _routes(RouteSettings settings) {
     return MaterialPageRoute(builder: (context) => DetailPage());
   if (settings.name == RoutesName.addPage)
     return MaterialPageRoute(builder: (context) => AddPage());
+  if (settings.name == RoutesName.unsplashPage)
+    return MaterialPageRoute(builder: (context) => UnsplashPage());
   return null;
 }
