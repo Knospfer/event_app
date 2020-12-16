@@ -35,7 +35,7 @@ class UnsplashState extends State<UnsplashPage> {
               //todo onClick
             ]),
             _padding(10),
-            CupertinoTextField(),
+            _searchBar(),
             _padding(20),
             _imageCard('https://picsum.photos/200/300'),
           ],
@@ -47,6 +47,28 @@ class UnsplashState extends State<UnsplashPage> {
   _padding(double padding) {
     return Padding(
       padding: EdgeInsets.only(bottom: padding),
+    );
+  }
+
+  _searchBar() {
+    return Container(
+      clipBehavior: Clip.hardEdge,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+          color: Colors.grey[300]),
+      child: Row(
+        children: [
+          Icon(Icons.search),
+          Expanded(
+              child: Form(
+            child: TextFormField(
+              decoration: InputDecoration(
+                  hintText: 'Search...', border: InputBorder.none),
+              validator: (value) {},
+            ),
+          ))
+        ],
+      ),
     );
   }
 
