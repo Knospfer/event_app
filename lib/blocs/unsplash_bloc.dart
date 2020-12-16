@@ -1,10 +1,19 @@
 import 'package:event_app/resources/api/unsplash_api.dart';
+import 'package:rxdart/rxdart.dart';
 
 class UnsplashBloc {
   UnsplashApi _api = UnsplashApi();
 
-  Future<List<String>> fetchPhotoUrls() async {
+  final _urls = PublishSubject<List<String>>();
+
+  Stream<List<String>> get urls => _urls.stream;
+
+  fetchPhotoUrls() async {
     final urls = await _api.fetchImages();
-    return urls;
+    _urls.sink.add(urls);
+  }
+
+  dispose() {
+    _urls.close();
   }
 }
