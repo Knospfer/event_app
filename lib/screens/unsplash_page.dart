@@ -1,3 +1,5 @@
+import 'package:event_app/blocs/unsplash_bloc.dart';
+import 'package:event_app/providers/unsplash_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +13,8 @@ class UnsplashPage extends StatefulWidget {
 class UnsplashState extends State<UnsplashPage> {
   @override
   Widget build(BuildContext context) {
+    final bloc = UnsplashProvider.of(context);
+
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.fromLTRB(20, 30, 20, 20),
@@ -36,12 +40,33 @@ class UnsplashState extends State<UnsplashPage> {
             ]),
             _padding(10),
             _searchBar(),
-            _padding(20),
-            _imageCard('https://picsum.photos/200/300'),
+            _buildCardList(bloc)
           ],
         ),
       ),
     );
+  }
+
+  _buildCardList(UnsplashBloc bloc) {
+    return StreamBuilder(
+        stream: bloc.urls,
+        builder: (context, snapshot) {
+          if (!snapshot.hasData)
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          return Expanded(
+              child: ListView.builder(
+                  physics: BouncingScrollPhysics(),
+                  itemCount: snapshot.data.length,
+                  itemBuilder: (context, index) {
+                    final url = snapshot.data[index];
+                    return Padding(
+                      padding: EdgeInsets.only(bottom: 20.0),
+                      child: _imageCard(url),
+                    );
+                  }));
+        });
   }
 
   _padding(double padding) {

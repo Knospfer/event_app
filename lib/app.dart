@@ -1,3 +1,4 @@
+import 'package:event_app/providers/unsplash_provider.dart';
 import 'package:event_app/routes.dart';
 import 'package:event_app/screens/add_page.dart';
 import 'package:event_app/screens/detail_page.dart';
@@ -8,9 +9,12 @@ import 'package:flutter/material.dart';
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Events',
-      onGenerateRoute: _routes,
+    return UnsplashProvider(
+      key: key,
+      child: MaterialApp(
+        title: 'Events',
+        onGenerateRoute: _routes,
+      ),
     );
   }
 }
@@ -23,6 +27,11 @@ Route _routes(RouteSettings settings) {
   if (settings.name == RoutesName.addPage)
     return MaterialPageRoute(builder: (context) => AddPage());
   if (settings.name == RoutesName.unsplashPage)
-    return MaterialPageRoute(builder: (context) => UnsplashPage());
+    return MaterialPageRoute(builder: (context) {
+      final unsplashBloc = UnsplashProvider.of(context);
+      unsplashBloc.fetchPhotoUrls();
+      return UnsplashPage();
+    });
+
   return null;
 }
