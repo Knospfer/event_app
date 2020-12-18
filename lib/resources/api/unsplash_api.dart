@@ -11,11 +11,11 @@ class UnsplashApi {
   Future<List<String>> fetchImages({Map<String, String> queryParams}) async {
     String queryString =
         '$_endpoint/photos?R&client_id=45_aoM8PPbvAmKV90vZLXGjiDOsZzLRa_K3hux63a5E';
-
-    queryParams.forEach((key, value) {
-      queryString += '&$key=$value';
-    });
-
+    if (queryParams != null) {
+      queryParams.forEach((key, value) {
+        queryString += '&$key=$value';
+      });
+    }
     final response = await client.get(queryString);
     List<dynamic> photos = json.decode(response.body);
 
