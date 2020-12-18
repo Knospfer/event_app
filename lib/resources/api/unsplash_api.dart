@@ -8,9 +8,15 @@ final _endpoint = 'https://api.unsplash.com';
 class UnsplashApi {
   Client client = Client();
 
-  Future<List<String>> fetchImages() async {
-    final response = await client.get(
-        '$_endpoint/photos?R&client_id=45_aoM8PPbvAmKV90vZLXGjiDOsZzLRa_K3hux63a5E');
+  Future<List<String>> fetchImages({Map<String, String> queryParams}) async {
+    String queryString =
+        '$_endpoint/photos?R&client_id=45_aoM8PPbvAmKV90vZLXGjiDOsZzLRa_K3hux63a5E';
+
+    queryParams.forEach((key, value) {
+      queryString += '&$key=$value';
+    });
+
+    final response = await client.get(queryString);
     List<dynamic> photos = json.decode(response.body);
 
     final mappedUrls =

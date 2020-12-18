@@ -13,6 +13,11 @@ class UnsplashBloc {
     _urls.sink.add(urls);
   }
 
+  fetchPhotoBySearch(String search) async {
+    final urls = await _api.fetchImages(queryParams: {'query': search});
+    _urls.sink.add(urls);
+  }
+
   dispose() {
     _urls.close();
   }
