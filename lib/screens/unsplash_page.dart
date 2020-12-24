@@ -39,7 +39,7 @@ class UnsplashState extends State<UnsplashPage> {
               //todo onClick
             ]),
             _padding(10),
-            _searchBar(),
+            _searchBar(bloc),
             _buildCardList(bloc)
           ],
         ),
@@ -75,7 +75,7 @@ class UnsplashState extends State<UnsplashPage> {
     );
   }
 
-  _searchBar() {
+  _searchBar(UnsplashBloc bloc) {
     return Container(
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
@@ -89,7 +89,9 @@ class UnsplashState extends State<UnsplashPage> {
             child: TextFormField(
               decoration: InputDecoration(
                   hintText: 'Search...', border: InputBorder.none),
-              validator: (value) {},
+              onFieldSubmitted: (value) {
+                bloc.fetchPhotoBySearch(value);
+              },
             ),
           ))
         ],

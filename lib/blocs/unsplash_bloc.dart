@@ -9,12 +9,12 @@ class UnsplashBloc {
   Stream<List<String>> get urls => _urls.stream;
 
   fetchPhotoUrls() async {
-    final urls = await _api.fetchImages();
+    final urls = await _api.fetchRandomImages();
     _urls.sink.add(urls);
   }
 
   fetchPhotoBySearch(String search) async {
-    final urls = await _api.fetchImages(queryParams: {'query': search});
+    final urls = await _api.searchImages(search);
     _urls.sink.add(urls);
   }
 
