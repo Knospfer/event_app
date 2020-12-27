@@ -17,7 +17,7 @@ class UnsplashState extends State<UnsplashPage> {
 
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.fromLTRB(20, 30, 20, 20),
+        padding: EdgeInsets.fromLTRB(20, 30, 20, 0),
         child: Column(
           children: [
             Row(children: [
@@ -40,7 +40,7 @@ class UnsplashState extends State<UnsplashPage> {
             ]),
             _padding(10),
             _searchBar(bloc),
-            _buildCardList(bloc)
+            Expanded(child: _buildCardList(bloc))
           ],
         ),
       ),
@@ -55,17 +55,16 @@ class UnsplashState extends State<UnsplashPage> {
             return Center(
               child: CircularProgressIndicator(),
             );
-          return Expanded(
-              child: ListView.builder(
-                  physics: BouncingScrollPhysics(),
-                  itemCount: snapshot.data.length,
-                  itemBuilder: (context, index) {
-                    final url = snapshot.data[index];
-                    return Padding(
-                      padding: EdgeInsets.only(bottom: 20.0),
-                      child: _imageCard(url),
-                    );
-                  }));
+          return ListView.builder(
+              physics: BouncingScrollPhysics(),
+              itemCount: snapshot.data.length,
+              itemBuilder: (context, index) {
+                final url = snapshot.data[index];
+                return Padding(
+                  padding: EdgeInsets.only(bottom: 20.0),
+                  child: _imageCard(url),
+                );
+              });
         });
   }
 
@@ -108,10 +107,13 @@ class UnsplashState extends State<UnsplashPage> {
           ),
         ),
         child: Container(
-          height: 200.0,
-          width: double.infinity,
-          child: Image.network(imagePath,
-              alignment: Alignment.center, fit: BoxFit.cover),
-        ));
+            decoration: BoxDecoration(color: Colors.grey[300]),
+            height: 200.0,
+            width: double.infinity,
+            child: FadeInImage.assetNetwork(
+                alignment: Alignment.center,
+                fit: BoxFit.cover,
+                placeholder: 'assets/unsplash.png',
+                image: imagePath)));
   }
 }
