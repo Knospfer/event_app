@@ -77,25 +77,28 @@ class UnsplashState extends State<UnsplashPage> {
 
   _searchBar(UnsplashBloc bloc) {
     return Container(
-      clipBehavior: Clip.hardEdge,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(8.0)),
-          color: Colors.grey[300]),
-      child: Row(
-        children: [
-          Icon(Icons.search),
-          Expanded(
-              child: Form(
-            child: TextFormField(
-              decoration: InputDecoration(
-                  hintText: 'Search...', border: InputBorder.none),
-              onFieldSubmitted: (value) {
-                bloc.fetchPhotoBySearch(value);
-              },
-            ),
-          ))
-        ],
-      ),
-    );
+        clipBehavior: Clip.hardEdge,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+            color: Colors.grey[300]),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10.0),
+          child: Row(
+            children: [
+              Icon(Icons.search),
+              Padding(padding: EdgeInsets.only(right: 4.0)),
+              Expanded(
+                  child: Form(
+                child: TextFormField(
+                  decoration: InputDecoration(
+                      hintText: 'Search...', border: InputBorder.none),
+                  onFieldSubmitted: (value) {
+                    bloc.fetchPhotoBySearch(value);
+                  },
+                ),
+              ))
+            ],
+          ),
+        ));
   }
 }
