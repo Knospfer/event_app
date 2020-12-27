@@ -15,7 +15,7 @@ class AddPage extends StatefulWidget {
 }
 
 class AddState extends State<AddPage> {
-  final EventModel event = EventModel(
+  EventModel event = EventModel(
       eventDate: DateTime(2021, 10, 12),
       currentDate: DateTime.now(),
       imagePath: 'https://picsum.photos/200/300',
@@ -144,7 +144,7 @@ class AddState extends State<AddPage> {
           cardTitle: ImagePickerTitle.unsplash,
           imagePath: ImagePickerPath.unsplash,
           onTap: () {
-            Navigator.pushNamed(context, RoutesName.unsplashPage);
+            _pushPageAndLoadSelection(context);
           },
         ),
         Text(
@@ -156,5 +156,17 @@ class AddState extends State<AddPage> {
             imagePath: ImagePickerPath.gallery),
       ],
     );
+  }
+
+  _pushPageAndLoadSelection(BuildContext context) async {
+    final result = await Navigator.pushNamed(context, RoutesName.unsplashPage);
+
+    setState(() {
+      event = EventModel(
+          eventDate: DateTime(2021, 10, 12),
+          currentDate: DateTime.now(),
+          imagePath: result,
+          name: 'Mock Event');
+    });
   }
 }
