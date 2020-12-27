@@ -1,5 +1,6 @@
 import 'package:event_app/blocs/unsplash_bloc.dart';
 import 'package:event_app/providers/unsplash_provider.dart';
+import 'package:event_app/widget/image_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -62,7 +63,7 @@ class UnsplashState extends State<UnsplashPage> {
                 final url = snapshot.data[index];
                 return Padding(
                   padding: EdgeInsets.only(bottom: 20.0),
-                  child: _imageCard(url),
+                  child: ImageCard(imagePath: url),
                 );
               });
         });
@@ -96,24 +97,5 @@ class UnsplashState extends State<UnsplashPage> {
         ],
       ),
     );
-  }
-
-  _imageCard(String imagePath) {
-    return Card(
-        clipBehavior: Clip.hardEdge,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(8.0),
-          ),
-        ),
-        child: Container(
-            decoration: BoxDecoration(color: Colors.grey[300]),
-            height: 200.0,
-            width: double.infinity,
-            child: FadeInImage.assetNetwork(
-                alignment: Alignment.center,
-                fit: BoxFit.cover,
-                placeholder: 'assets/unsplash.png',
-                image: imagePath)));
   }
 }
