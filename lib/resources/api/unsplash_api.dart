@@ -5,13 +5,14 @@ import 'package:http/http.dart' show Client;
 
 final _endpoint = 'https://api.unsplash.com';
 final _clientId = '45_aoM8PPbvAmKV90vZLXGjiDOsZzLRa_K3hux63a5E';
+final _itemPerPage = 30;
 
 class UnsplashApi {
   Client client = Client();
 
   Future<List<String>> fetchRandomImages() async {
     String queryString =
-        '$_endpoint/photos/random?client_id=$_clientId&count=10';
+        '$_endpoint/photos/random?client_id=$_clientId&count=$_itemPerPage';
     final response = await client.get(queryString);
     List<dynamic> photos = json.decode(response.body);
 
@@ -22,7 +23,7 @@ class UnsplashApi {
 
   Future<List<String>> searchImages(String search) async {
     String queryString =
-        "$_endpoint/search/photos?client_id=$_clientId&query=$search";
+        "$_endpoint/search/photos?client_id=$_clientId&query=$search&count=$_itemPerPage";
 
     final response = await client.get(queryString);
     final photos = json.decode(response.body);
