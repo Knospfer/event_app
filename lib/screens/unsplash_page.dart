@@ -62,9 +62,13 @@ class UnsplashState extends State<UnsplashPage> {
               itemBuilder: (context, index) {
                 final url = snapshot.data[index];
                 return Padding(
-                  padding: EdgeInsets.only(bottom: 20.0),
-                  child: ImageCard(imagePath: url),
-                );
+                    padding: EdgeInsets.only(bottom: 20.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context, url);
+                      },
+                      child: ImageCard(imagePath: url),
+                    ));
               });
         });
   }
