@@ -169,8 +169,13 @@ class AddState extends State<AddPage> {
           textAlign: TextAlign.center,
         ),
         ImagePickerCard(
-            cardTitle: ImagePickerTitle.gallery,
-            imagePath: ImagePickerPath.gallery),
+          cardTitle: ImagePickerTitle.gallery,
+          imagePath: ImagePickerPath.gallery,
+          onTap: () {
+            Scaffold.of(context)
+                .showSnackBar(SnackBar(content: Text('Coming soon')));
+          },
+        ),
       ],
     );
   }
