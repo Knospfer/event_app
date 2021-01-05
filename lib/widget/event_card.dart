@@ -48,7 +48,7 @@ class EventCard extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 60, color: Colors.white),
               ),
-              textTwo: Text('Surf',
+              textTwo: Text(eventModel?.name ?? 'Surf',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 28, color: Colors.white))),
         ),
