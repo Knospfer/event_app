@@ -15,6 +15,8 @@ class AddPage extends StatefulWidget {
 }
 
 class AddState extends State<AddPage> {
+  final _formKey = GlobalKey<FormState>();
+
   EventModel event = EventModel(
       eventDate: DateTime(2021, 10, 12),
       currentDate: DateTime.now(),
@@ -94,46 +96,61 @@ class AddState extends State<AddPage> {
   }
 
   _buildForm() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Title',
-          style: _titleStyle(),
-        ),
-        _padding(),
-        Text('Road trip...'),
-        _padding(bottom: 30),
-        Text(
-          'Date & Time',
-          style: _titleStyle(),
-        ),
-        _padding(),
-        Text('Date picker'),
-        _padding(bottom: 30),
-        Text(
-          'Background',
-          style: _titleStyle(),
-        ),
-        _padding(),
-        _buildPickerRow(),
-        _padding(bottom: 30),
-        Align(
-            alignment: Alignment.topCenter,
-            child: Container(
-              width: double.infinity,
-              child: CupertinoButton(
-                color: CupertinoColors.black,
-                onPressed: () {},
-                child: Text(
-                  'Done',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-            )),
-        _padding(bottom: 30),
-      ],
-    );
+    return Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Title',
+              style: _titleStyle(),
+            ),
+            _padding(),
+            TextFormField(
+              decoration: InputDecoration(hintText: 'Road trip..'),
+              onFieldSubmitted: (value) {
+                setState(() {
+                  event.name = value;
+                });
+              },
+              validator: (value) {
+                if (value.isEmpty) return 'Please submit a title';
+                return null;
+              },
+            ),
+            _padding(bottom: 30),
+            Text(
+              'Date & Time',
+              style: _titleStyle(),
+            ),
+            _padding(),
+            Text('Date picker'),
+            _padding(bottom: 30),
+            Text(
+              'Background',
+              style: _titleStyle(),
+            ),
+            _padding(),
+            _buildPickerRow(),
+            _padding(bottom: 30),
+            Align(
+                alignment: Alignment.topCenter,
+                child: Container(
+                  width: double.infinity,
+                  child: CupertinoButton(
+                    color: CupertinoColors.black,
+                    onPressed: () {
+                      _validateForm(context);
+                    },
+                    child: Text(
+                      'Done',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                )),
+            _padding(bottom: 30),
+          ],
+        ));
   }
 
   _buildPickerRow() {
@@ -168,5 +185,14 @@ class AddState extends State<AddPage> {
           imagePath: result,
           name: 'Mock Event');
     });
+  }
+
+  _validateForm(BuildContext context) {
+    if (_formKey.currentState.validate()) {
+      Navigator.pop(context);
+    } else {
+      Scaffold.of(context)
+          .showSnackBar(SnackBar(content: Text('Insert an event name')));
+    }
   }
 }
