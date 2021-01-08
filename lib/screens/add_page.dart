@@ -15,6 +15,7 @@ class AddPage extends StatefulWidget {
 }
 
 class AddState extends State<AddPage> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   final _formKey = GlobalKey<FormState>();
 
   EventModel event = EventModel(
@@ -26,6 +27,7 @@ class AddState extends State<AddPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       body: Column(
         children: [
           Padding(
@@ -172,7 +174,7 @@ class AddState extends State<AddPage> {
           cardTitle: ImagePickerTitle.gallery,
           imagePath: ImagePickerPath.gallery,
           onTap: () {
-            Scaffold.of(context)
+            _scaffoldKey.currentState
                 .showSnackBar(SnackBar(content: Text('Coming soon')));
           },
         ),
@@ -196,7 +198,7 @@ class AddState extends State<AddPage> {
     if (_formKey.currentState.validate()) {
       Navigator.pop(context);
     } else {
-      Scaffold.of(context)
+      _scaffoldKey.currentState
           .showSnackBar(SnackBar(content: Text('Insert an event name')));
     }
   }
