@@ -23,18 +23,13 @@ class EventCard extends StatelessWidget {
                 fit: BoxFit.cover,
                 alignment: Alignment.topCenter),
           ),
-          child: GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, RoutesName.detailPage);
-              },
-              child: Stack(
-                children: [
-                  Positioned.fill(
-                      child: Container(color: Color.fromRGBO(0, 0, 0, 0.3))),
-                  Padding(
-                      padding: EdgeInsets.all(20.0), child: _buildCardBody()),
-                ],
-              )),
+          child: Stack(
+            children: [
+              Positioned.fill(
+                  child: Container(color: Color.fromRGBO(0, 0, 0, 0.3))),
+              Padding(padding: EdgeInsets.all(20.0), child: _buildCardBody()),
+            ],
+          ),
         ));
   }
 

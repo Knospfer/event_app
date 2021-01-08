@@ -1,4 +1,5 @@
 import 'package:event_app/models/event.dart';
+import 'package:event_app/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../widget/event_card.dart';
@@ -38,9 +39,13 @@ class HomePage extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsets.fromLTRB(10, 0, 10, 30),
-          child: EventCard(eventModel: event),
-        )
+            padding: EdgeInsets.fromLTRB(10, 0, 10, 30),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, RoutesName.detailPage);
+              },
+              child: EventCard(eventModel: event),
+            ))
       ],
     );
   }
