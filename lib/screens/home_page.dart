@@ -2,9 +2,11 @@ import 'package:event_app/models/event.dart';
 import 'package:event_app/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../widget/event_card.dart';
 
 class HomePage extends StatelessWidget {
+  final today = new DateFormat.yMMMMEEEEd().format(DateTime.now());
   final EventModel event = EventModel(
       eventDate: DateTime(2021, 4, 12),
       currentDate: DateTime.now(),
@@ -21,7 +23,7 @@ class HomePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'THURSDAY, MARCH 19',
+                today.toUpperCase(),
                 style: TextStyle(
                   color: Colors.grey,
                   fontSize: 14.0,
