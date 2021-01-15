@@ -1,3 +1,4 @@
+import 'package:event_app/providers/event_provider.dart';
 import 'package:event_app/providers/unsplash_provider.dart';
 import 'package:event_app/routes.dart';
 import 'package:event_app/screens/add_page.dart';
@@ -10,12 +11,14 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return UnsplashProvider(
-      key: key,
-      child: MaterialApp(
-        title: 'Events',
-        onGenerateRoute: _routes,
-      ),
-    );
+        key: key,
+        child: EventProvider(
+          key: key,
+          child: MaterialApp(
+            title: 'Events',
+            onGenerateRoute: _routes,
+          ),
+        ));
   }
 }
 
