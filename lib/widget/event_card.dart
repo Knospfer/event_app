@@ -1,6 +1,6 @@
 import 'package:event_app/models/event.dart';
-import 'package:event_app/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class EventCard extends StatelessWidget {
   final EventModel eventModel;
@@ -39,11 +39,11 @@ class EventCard extends StatelessWidget {
         Row(
           children: _buildRow(
               textOne: Text(
-                '42',
+                eventModel?.timeRemaining?.toString() ?? '0',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 60, color: Colors.white),
               ),
-              textTwo: Text(eventModel?.name ?? 'Surf',
+              textTwo: Text(eventModel?.name ?? 'Road Trip',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 28, color: Colors.white))),
         ),
@@ -56,7 +56,7 @@ class EventCard extends StatelessWidget {
                   style: TextStyle(color: Colors.white),
                 ),
                 textTwo: Text(
-                  '21:47 PM - Fri May 1 2020',
+                  DateFormat.yMMMd().format(eventModel.eventDate),
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.white),
                 )))

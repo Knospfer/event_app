@@ -1,5 +1,6 @@
 import 'package:event_app/models/event.dart';
 import 'package:event_app/routes.dart';
+import 'package:event_app/widget/MultiplatformPicker.dart';
 import 'package:event_app/widget/event_card.dart';
 import 'package:event_app/widget/image_picker_card.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,10 +20,10 @@ class AddState extends State<AddPage> {
   final _formKey = GlobalKey<FormState>();
 
   EventModel event = EventModel(
-      eventDate: DateTime(2021, 10, 12),
+      eventDate: DateTime(2021, 4, 12),
       currentDate: DateTime.now(),
       imagePath: 'https://picsum.photos/200/300',
-      name: 'Mock Event');
+      name: 'Road Trip');
 
   @override
   Widget build(BuildContext context) {
@@ -126,7 +127,13 @@ class AddState extends State<AddPage> {
               style: _titleStyle(),
             ),
             _padding(),
-            Text('Date picker'),
+            MultiplatformPicker(
+              onDataSubmitted: (DateTime dateSubmitted) {
+                setState(() {
+                  event.eventDate = dateSubmitted;
+                });
+              },
+            ),
             _padding(bottom: 30),
             Text(
               'Background',
@@ -184,14 +191,11 @@ class AddState extends State<AddPage> {
 
   _pushPageAndLoadSelection(BuildContext context) async {
     final result = await Navigator.pushNamed(context, RoutesName.unsplashPage);
-
-    setState(() {
-      event = EventModel(
-          eventDate: DateTime(2021, 10, 12),
-          currentDate: DateTime.now(),
-          imagePath: result,
-          name: 'Mock Event');
-    });
+    if (result != null) {
+      setState(() {
+        event.imagePath = result;
+      });
+    }
   }
 
   _validateForm(BuildContext context) {

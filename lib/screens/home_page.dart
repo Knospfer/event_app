@@ -6,7 +6,7 @@ import '../widget/event_card.dart';
 
 class HomePage extends StatelessWidget {
   final EventModel event = EventModel(
-      eventDate: DateTime(2021, 10, 12),
+      eventDate: DateTime(2021, 4, 12),
       currentDate: DateTime.now(),
       imagePath: 'https://picsum.photos/200/300',
       name: 'Mock Event');
