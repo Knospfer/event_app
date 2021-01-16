@@ -1,4 +1,5 @@
 import 'package:event_app/models/event.dart';
+import 'package:event_app/providers/event_provider.dart';
 import 'package:event_app/routes.dart';
 import 'package:event_app/widget/MultiplatformPicker.dart';
 import 'package:event_app/widget/event_card.dart';
@@ -200,6 +201,8 @@ class AddState extends State<AddPage> {
 
   _validateForm(BuildContext context) {
     if (_formKey.currentState.validate()) {
+      final eventBloc = EventProvider.of(context);
+      eventBloc.addNewEvent(event);
       Navigator.pop(context);
     } else {
       _scaffoldKey.currentState
