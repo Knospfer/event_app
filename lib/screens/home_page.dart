@@ -38,7 +38,7 @@ class HomePage extends StatelessWidget {
               stream: eventBloc.events,
               builder: (context, AsyncSnapshot<List<EventModel>> snapshot) {
                 if (!snapshot.hasData) {
-                  return Center(child: Text("There's no event yet!"));
+                  return Container();
                 }
                 return ListView.builder(
                     shrinkWrap: true,
@@ -59,7 +59,8 @@ class HomePage extends StatelessWidget {
         padding: EdgeInsets.only(bottom: 30),
         child: GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, RoutesName.detailPage);
+            Navigator.pushNamed(context, RoutesName.detailPage,
+                arguments: eventModel);
           },
           child: EventCard(eventModel: eventModel),
         ));

@@ -1,8 +1,12 @@
+import 'package:event_app/models/event.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatelessWidget {
   final double _bigFont = 38;
+  final EventModel eventModel;
+
+  DetailPage({this.eventModel});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +14,7 @@ class DetailPage extends StatelessWidget {
         body: Container(
             decoration: BoxDecoration(
                 image: DecorationImage(
-              image: NetworkImage('https://picsum.photos/200/300'),
+              image: NetworkImage(eventModel.imagePath),
               fit: BoxFit.cover,
               alignment: Alignment.topCenter,
             )),
@@ -21,12 +25,12 @@ class DetailPage extends StatelessWidget {
                     color: Color.fromRGBO(0, 0, 0, 0.5),
                   ),
                 ),
-                _buildPageBody(context)
+                _buildPageBody(context, eventModel)
               ],
             )));
   }
 
-  _buildPageBody(BuildContext context) {
+  _buildPageBody(BuildContext context, EventModel eventModel) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
       child: Column(
@@ -50,13 +54,13 @@ class DetailPage extends StatelessWidget {
               children: [
                 Column(
                   children: [
-                    _buildRow(firstText: "8", secondText: "MONTHS"),
+                    _buildRow(
+                        firstText: eventModel.monthRemaining.toString(),
+                        secondText: "MONTHS"),
                     _buildPaddingBottom(20),
-                    _buildRow(firstText: "5", secondText: "DAYS"),
-                    _buildPaddingBottom(20),
-                    _buildRow(firstText: "0", secondText: "HOURS"),
-                    _buildPaddingBottom(20),
-                    _buildRow(firstText: "51", secondText: "MINUTES"),
+                    _buildRow(
+                        firstText: eventModel.daysRemaining.toString(),
+                        secondText: "DAYS"),
                   ],
                 ),
                 Column(
@@ -65,7 +69,7 @@ class DetailPage extends StatelessWidget {
                     Text('UNTIL', style: TextStyle(color: Colors.white)),
                     _buildPaddingBottom(20),
                     Text(
-                      'Oljanto Trip',
+                      eventModel.name,
                       style: TextStyle(
                           fontSize: _bigFont,
                           fontWeight: FontWeight.bold,

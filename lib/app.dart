@@ -1,3 +1,4 @@
+import 'package:event_app/models/event.dart';
 import 'package:event_app/providers/event_provider.dart';
 import 'package:event_app/providers/unsplash_provider.dart';
 import 'package:event_app/routes.dart';
@@ -25,8 +26,13 @@ class App extends StatelessWidget {
 Route _routes(RouteSettings settings) {
   if (settings.name == RoutesName.rootPage)
     return MaterialPageRoute(builder: (context) => RootPage());
-  if (settings.name == RoutesName.detailPage)
-    return MaterialPageRoute(builder: (context) => DetailPage());
+  if (settings.name == RoutesName.detailPage) {
+    final EventModel eventModel = settings.arguments;
+    return MaterialPageRoute(
+        builder: (context) => DetailPage(
+              eventModel: eventModel,
+            ));
+  }
   if (settings.name == RoutesName.addPage)
     return MaterialPageRoute(builder: (context) => AddPage());
   if (settings.name == RoutesName.unsplashPage)
