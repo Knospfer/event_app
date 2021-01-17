@@ -17,3 +17,4 @@ https://www.pinterest.it/pin/19421842133357041/
 -   Streams and StreamBuilder
 -   Api calls
 -   Form validation 
+-   Data persistence (sembast NoSql database)
