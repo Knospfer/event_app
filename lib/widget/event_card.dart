@@ -39,7 +39,7 @@ class EventCard extends StatelessWidget {
         Row(
           children: _buildRow(
               textOne: Text(
-                eventModel?.daysRemaining?.toString() ?? '0',
+                eventModel?.daysInterval?.toString() ?? '0',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 60, color: Colors.white),
               ),

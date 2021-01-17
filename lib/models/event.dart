@@ -8,14 +8,14 @@ class EventModel {
   String imagePath;
 
   //  not accurate
-  int get daysRemaining {
+  int get daysInterval {
     return DateTimeRange(start: currentDate, end: eventDate).duration.inDays +
         1;
   }
 
   //  not accurate
   int get monthRemaining {
-    return (daysRemaining ~/ 30).toInt();
+    return (daysInterval ~/ 30).toInt();
   }
 
   EventModel(

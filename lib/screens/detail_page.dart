@@ -59,7 +59,7 @@ class DetailPage extends StatelessWidget {
                         secondText: "MONTHS"),
                     _buildPaddingBottom(20),
                     _buildRow(
-                        firstText: eventModel.daysRemaining.toString(),
+                        firstText: eventModel.daysInterval.toString(),
                         secondText: "DAYS"),
                   ],
                 ),
