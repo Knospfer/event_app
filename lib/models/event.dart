@@ -24,15 +24,15 @@ class EventModel {
   factory EventModel.fromMap(int id, Map<String, dynamic> map) {
     return EventModel(
         id: id,
-        eventDate: map['eventDate'],
+        eventDate: DateTime.parse(map['eventDate']),
         currentDate: DateTime.now(),
-        name: map['eventDate'],
-        imagePath: map['eventDate']);
+        name: map['name'],
+        imagePath: map['imagePath']);
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'eventDate': this.eventDate,
+      'eventDate': this.eventDate.toString(),
       'name': this.name,
       'imagePath': this.imagePath
     };
