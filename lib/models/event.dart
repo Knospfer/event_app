@@ -14,6 +14,11 @@ class EventModel {
   }
 
   //  not accurate
+  int get daysRemaining {
+    return daysInterval - (monthRemaining * 30);
+  }
+
+  //  not accurate
   int get monthRemaining {
     return (daysInterval ~/ 30).toInt();
   }
