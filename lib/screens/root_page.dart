@@ -34,7 +34,6 @@ class RootState extends State<RootPage> {
           child: Icon(Icons.add),
         ),
         bottomNavigationBar: BottomAppBar(
-          shape: CircularNotchedRectangle(),
           clipBehavior: Clip.antiAlias,
           notchMargin: 10.0,
           child: BottomNavigationBar(
