@@ -34,21 +34,22 @@ class HomePage extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          StreamBuilder(
-              stream: eventBloc.events,
-              builder: (context, AsyncSnapshot<List<EventModel>> snapshot) {
-                if (!snapshot.hasData) {
-                  return Container();
-                }
-                return ListView.builder(
-                    shrinkWrap: true,
-                    physics: BouncingScrollPhysics(),
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (context, index) {
-                      final event = snapshot.data[index];
-                      return _tappableCard(context, event);
-                    });
-              })
+          Expanded(
+              child: StreamBuilder(
+                  stream: eventBloc.events,
+                  builder: (context, AsyncSnapshot<List<EventModel>> snapshot) {
+                    if (!snapshot.hasData) {
+                      return Container();
+                    }
+                    return ListView.builder(
+                        shrinkWrap: true,
+                        physics: BouncingScrollPhysics(),
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (context, index) {
+                          final event = snapshot.data[index];
+                          return _tappableCard(context, event);
+                        });
+                  })),
         ],
       ),
     ));
