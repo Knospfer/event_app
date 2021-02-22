@@ -41,6 +41,8 @@ dependencies:
   #Local storage
   path_provider: ^1.6.7
   sembast: ^2.4.3
+  #either
+  dartz: ^0.9.2
 
 dev_dependencies:
   # add the generator to your dev_dependencies

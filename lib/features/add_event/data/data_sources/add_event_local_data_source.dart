@@ -8,7 +8,6 @@ abstract class AddEventLocalDataSource {
 
 @LazySingleton(as: AddEventLocalDataSource)
 class AddEventLocalDataSourceConcrete implements AddEventLocalDataSource {
-  //todo get it lo injecterà?
   final Database database;
   StoreRef _store;
 
