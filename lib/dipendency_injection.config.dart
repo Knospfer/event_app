@@ -8,6 +8,7 @@ import 'package:sembast/sembast.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
+import 'features/add_event/presentation/blocs/add_event_bloc.dart';
 import 'features/add_event/data/data_sources/add_event_local_data_source.dart';
 import 'features/add_event/data/repositories/add_event_repository_concrete.dart';
 import 'features/add_event/domain/repositories/add_event_repository.dart';
@@ -31,6 +32,7 @@ GetIt $initGetIt(
       () => AddEventRepositoryConcrete(get<AddEventLocalDataSource>()));
   gh.lazySingleton<AddEventUseCase>(
       () => AddEventUseCase(get<AddEventRepositoy>()));
+  gh.factory<AddEventBloc>(() => AddEventBloc(get<AddEventUseCase>()));
   return get;
 }
 
