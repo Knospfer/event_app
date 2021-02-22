@@ -11,6 +11,7 @@ import 'package:injectable/injectable.dart';
 import 'features/add_event/data/data_sources/add_event_local_data_source.dart';
 import 'features/add_event/data/repositories/add_event_repository_concrete.dart';
 import 'features/add_event/domain/repositories/add_event_repository.dart';
+import 'features/add_event/domain/use_cases/add_event_use_case.dart';
 import 'core/data_sources/db_initializer.dart';
 
 /// adds generated dependencies
@@ -28,6 +29,8 @@ GetIt $initGetIt(
       () => AddEventLocalDataSourceConcrete(get<Database>()));
   gh.lazySingleton<AddEventRepositoy>(
       () => AddEventRepositoryConcrete(get<AddEventLocalDataSource>()));
+  gh.lazySingleton<AddEventUseCase>(
+      () => AddEventUseCase(get<AddEventRepositoy>()));
   return get;
 }
 
