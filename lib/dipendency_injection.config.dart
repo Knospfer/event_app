@@ -18,14 +18,14 @@ import 'core/data_sources/db_initializer.dart';
 /// adds generated dependencies
 /// to the provided [GetIt] instance
 
-GetIt $initGetIt(
+Future<GetIt> $initGetIt(
   GetIt get, {
   String environment,
   EnvironmentFilter environmentFilter,
-}) {
+}) async {
   final gh = GetItHelper(get, environment, environmentFilter);
-  final dBInitializer = _$DBInitializer();
-  gh.factoryAsync<Database>(() => dBInitializer.sembast);
+  final resolvedDatabase = await DBInitializer.initDB();
+  gh.lazySingleton<Database>(() => resolvedDatabase);
   gh.lazySingleton<AddEventLocalDataSource>(
       () => AddEventLocalDataSourceConcrete(get<Database>()));
   gh.lazySingleton<AddEventRepositoy>(
@@ -35,5 +35,3 @@ GetIt $initGetIt(
   gh.factory<AddEventBloc>(() => AddEventBloc(get<AddEventUseCase>()));
   return get;
 }
-
-class _$DBInitializer extends DBInitializer {}
