@@ -16,6 +16,11 @@ import 'features/add_event/domain/repositories/add_event_repository.dart';
 import 'features/add_event/domain/use_cases/add_event_use_case.dart';
 import 'core/data_sources/client_module.dart';
 import 'core/data_sources/db_initializer.dart';
+import 'features/home/presentation/blocs/event_list/event_list_bloc.dart';
+import 'features/home/data/data_sources/fetch_event_list_local_data_source.dart';
+import 'features/home/domain/repositories/fetch_event_list_repository.dart';
+import 'features/home/data/repositories/fetch_event_list_repository_concrete.dart';
+import 'features/home/domain/use_cases/fetch_event_list_use_case.dart';
 import 'features/add_event/domain/use_cases/fetch_random_images_from_unsplash.dart';
 import 'features/add_event/domain/use_cases/search_images_from_unsplash.dart';
 import 'features/add_event/data/data_sources/unsplash_remote_data_source.dart';
@@ -36,6 +41,12 @@ Future<GetIt> $initGetIt(
   gh.factory<Client>(() => clientModule.client);
   final resolvedDatabase = await DBInitializer.initDB();
   gh.lazySingleton<Database>(() => resolvedDatabase);
+  gh.lazySingleton<FetchEventListLocalDataSource>(
+      () => FetchEventListLocalDataSourceConcrete(get<Database>()));
+  gh.lazySingleton<FetchEventListRepository>(() =>
+      FetchEventListRepositoryConcrete(get<FetchEventListLocalDataSource>()));
+  gh.lazySingleton<FetchEventListUseCase>(
+      () => FetchEventListUseCase(get<FetchEventListRepository>()));
   gh.lazySingleton<UnplashRemoteDataSource>(
       () => UnplashRemoteDataSourceConcrete(get<Client>()));
   gh.lazySingleton<UnsplashRepository>(
@@ -46,6 +57,7 @@ Future<GetIt> $initGetIt(
       () => AddEventRepositoryConcrete(get<AddEventLocalDataSource>()));
   gh.lazySingleton<AddEventUseCase>(
       () => AddEventUseCase(get<AddEventRepositoy>()));
+  gh.factory<EventListBloc>(() => EventListBloc(get<FetchEventListUseCase>()));
   gh.lazySingleton<FetchRandomImagesFromUnsplash>(
       () => FetchRandomImagesFromUnsplash(get<UnsplashRepository>()));
   gh.lazySingleton<SearchImagesFromUnsplashUseCase>(
