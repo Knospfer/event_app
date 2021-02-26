@@ -1,6 +1,9 @@
 import 'package:event_app/core/models/event_model.dart';
 import 'package:event_app/core/presentation/widgets/event_card.dart';
+import 'package:event_app/dipendency_injection.dart';
 import 'package:event_app/features/add_event/presentation/blocs/add_event_bloc.dart';
+import 'package:event_app/features/add_event/presentation/blocs/unsplash/unsplash_bloc.dart';
+import 'package:event_app/features/add_event/presentation/screens/unsplash_page.dart';
 import 'package:event_app/features/add_event/presentation/widgets/image_picker_card.dart';
 import 'package:event_app/features/add_event/presentation/widgets/multi_platform_picker.dart';
 import 'package:flutter/cupertino.dart';
@@ -203,15 +206,18 @@ class AddState extends State<AddPage> {
   }
 
   _pushPageAndLoadSelection(BuildContext context) async {
-    //  TODO da rifare
-    // final result = await Navigator.pushNamed(context, 'unsplash');
-    // if (result != null) {
-    //   setState(() {
-    //     event.imagePath = result;
-    //   });
-    // }
-    _scaffoldKey.currentState
-        .showSnackBar(SnackBar(content: Text('Coming soon')));
+    final result =
+        await Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return BlocProvider<UnsplashBloc>(
+        create: (_) => getIt<UnsplashBloc>(),
+        child: UnsplashPage(),
+      );
+    }));
+    if (result != null) {
+      setState(() {
+        event.imagePath = result;
+      });
+    }
   }
 
   _validateForm(BuildContext context) {
