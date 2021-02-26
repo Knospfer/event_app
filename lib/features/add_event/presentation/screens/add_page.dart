@@ -16,7 +16,7 @@ class AddPage extends StatefulWidget {
     return AddState();
   }
 }
-
+//TODO this code is a mess
 class AddState extends State<AddPage> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final _formKey = GlobalKey<FormState>();
