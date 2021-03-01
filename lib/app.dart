@@ -1,7 +1,9 @@
 import 'package:event_app/core/enums/routes.dart';
+import 'package:event_app/core/models/event_model.dart';
 import 'package:event_app/dipendency_injection.dart';
 import 'package:event_app/features/add_event/presentation/blocs/add_event_bloc.dart';
 import 'package:event_app/features/add_event/presentation/screens/add_page.dart';
+import 'package:event_app/features/detail/presentation/detail_page.dart';
 import 'package:event_app/features/root_navigation/presentation/screens/root_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,6 +26,12 @@ Route _routes(RouteSettings settings) {
         child: AddPage(),
       );
     });
+  if (settings.name == RoutesName.detailPage) {
+    return MaterialPageRoute(builder: (context) {
+      EventModel eventModel = settings.arguments;
+      return DetailPage(eventModel: eventModel);
+    });
+  }
 
   return MaterialPageRoute(builder: (_) => RootPage());
 }
